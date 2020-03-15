@@ -8,7 +8,7 @@ describe('PA-Parcial 01 - parte 01 - Suite de pruebas app web', function () {
     cy.get('._1XYPC').contains('Premium').click()
     cy.get('._1XYPC').contains('For Teams').click()
   })
-  it('Probar registro', function () {
+  it('Probar registro de usuario', function () {
     Cypress.on('uncaught:exception', (err, runnable) => {
       return false
     })
