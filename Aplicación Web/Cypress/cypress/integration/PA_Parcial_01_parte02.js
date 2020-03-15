@@ -1,11 +1,15 @@
 describe('PA-Parcial 01 - parte 02 - Suite de pruebas app web', function () {
-  it('Probar crear nueva tarea', function () {
-    cy.visit('https://todoist.com/users/showLogin')
-
+  Cypress.Commands.add('LoginApp', () => {
+    cy.visit('https://www.todoist.com/')
+    cy.get('a').contains('Login').click()
     cy.get('input[name="email"]').click().type("en.jimenez@uniandes.edu.co")
     cy.get('input[name="password"]').click().type("12345678")
     cy.get('button.submit_btn').click()
-    cy.wait(3000);
+    cy.wait(2000);
+  })
+
+  it('Probar crear nueva tarea', function () {
+    cy.LoginApp()
 
     cy.get('li.agenda_add_task').contains('Add task').click()
     cy.get('div.item_editor_input').click().type("Nueva Tarea")
@@ -16,12 +20,7 @@ describe('PA-Parcial 01 - parte 02 - Suite de pruebas app web', function () {
     cy.get('button.item_editor_submit').last().contains('Add Task').click()
   })
   it('Probar crear nuevo proyecto', function () {
-    cy.visit('https://todoist.com/users/showLogin')
-
-    cy.get('input[name="email"]').click().type("en.jimenez@uniandes.edu.co")
-    cy.get('input[name="password"]').click().type("12345678")
-    cy.get('button.submit_btn').click()
-    cy.wait(3000);
+    cy.LoginApp()
 
     cy.get('a.sel_add_project').contains('Add Project').click()
     cy.get('#edit_project_modal_field_name').click().type("Nuevo Proyecto")
@@ -30,12 +29,7 @@ describe('PA-Parcial 01 - parte 02 - Suite de pruebas app web', function () {
     cy.get('button').contains('Add').click()
   })
   it('Probar opciones bandeja', function () {
-    cy.visit('https://todoist.com/users/showLogin')
-
-    cy.get('input[name="email"]').click().type("en.jimenez@uniandes.edu.co")
-    cy.get('input[name="password"]').click().type("12345678")
-    cy.get('button.submit_btn').click()
-    cy.wait(3000);
+    cy.LoginApp()
 
     cy.get('li').contains('Inbox').click()
     cy.get('li').contains('Today').click()
